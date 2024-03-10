@@ -3,35 +3,53 @@ using Welcome.Others;
 using Welcome.ViewModel;
 using Welcome.View;
 using WelcomeExtended.Others;
+using WelcomeExtended.Data;
+using WelcomeExtended.Helpers;
 namespace WelcomeExtended
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            try
+            UserData userData = new UserData();
+            User studentUser = new User()
             {
-                var user = new User
-                {
-                    Names = "John Smith",
-                    Password = "password123",
-                    Role = UserRolesEnum.STUDENT
-                };
+                Names = "student",
+                Password = "123",
+                Role = UserRolesEnum.STUDENT
+            };  
+            userData.addUser(studentUser);
+            User studentUser1 = new User()
+            {
+                Names = "student1",
+                Password = "123",
+                Role = UserRolesEnum.STUDENT
+            };
+            userData.addUser(studentUser1);
+            User teacherUser = new User()
+            {
+                Names = "teacher",
+                Password = "1234",
+                Role = UserRolesEnum.PROFESSOR
+            };
+            userData.addUser(teacherUser);
+            User adminUser = new User()
+            {
+                Names = "admin",
+                Password = "12345",
+                Role = UserRolesEnum.ADMIN
+            };
+            userData.addUser(adminUser);
 
-                var viewModel = new UserViewModel(user);
-
-                var view = new UserView(viewModel);
-                view.display();
-                view.displayError();
-            }
-            catch (Exception e)
+            string name, password;
+            Console.WriteLine("Please enter your name: ");
+            name = Console.ReadLine();
+            Console.WriteLine("Please enter your password: ");
+            password = Console.ReadLine();
+            if (UserHelper.validateCredentials(userData, name, password))
             {
-                var log = new ActionOnError(Delegates.Log);
-                log(e.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Executed in any case!");
+                User currUser = UserHelper.getUser(userData, name, password);
+                Console.WriteLine(UserHelper.ToString(currUser));
             }
         }
     }
