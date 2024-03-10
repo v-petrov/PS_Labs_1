@@ -12,6 +12,6 @@ namespace Welcome.Model
         public string Names { get; set; }
         public string Password { get; set; }
         public UserRolesEnum Role { get; set; }
-        
+        public int Id { get; set; }
     }
 }
