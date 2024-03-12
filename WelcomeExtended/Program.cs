@@ -5,12 +5,17 @@ using Welcome.View;
 using WelcomeExtended.Others;
 using WelcomeExtended.Data;
 using WelcomeExtended.Helpers;
+using Microsoft.Extensions.Logging;
+using WelcomeExtended.Loggers;
 namespace WelcomeExtended
 {
     internal class Program
     {
+        private static int eventId = 0;
         static void Main(string[] args)
         {
+            ILogger successfulLogger = new FileLogger("successfullyLogInUsers.txt");
+            ILogger notSuccessfulLogger = new FileLogger("notSuccessfullyLogInUsers.txt");
             UserData userData = new UserData();
             User studentUser = new User()
             {
@@ -46,10 +51,24 @@ namespace WelcomeExtended
             name = Console.ReadLine();
             Console.WriteLine("Please enter your password: ");
             password = Console.ReadLine();
-            if (UserHelper.validateCredentials(userData, name, password))
+            int res = UserHelper.validateCredentials(userData, name, password);
+            switch (res)
             {
-                User currUser = UserHelper.getUser(userData, name, password);
-                Console.WriteLine(UserHelper.ToString(currUser));
+                case 1:
+                    User currUser = UserHelper.getUser(userData, name, password);
+                    Console.WriteLine(UserHelper.ToString(currUser));
+                    successfulLogger.Log(LogLevel.Information, new EventId(eventId++), $"User {name} logged in successfully.", null, (state, exception) => state.ToString());
+                    break;
+                case 0:
+                    LoggerHelper.notSuccessfulLogin(notSuccessfulLogger, eventId++, "The name cannot be empty!");
+                    break;
+                case 2:
+                    LoggerHelper.notSuccessfulLogin(notSuccessfulLogger, eventId++, "The password cannot be empty!");
+                    break;
+                case 3:
+                    LoggerHelper.notSuccessfulLogin(notSuccessfulLogger, eventId++, "No such user found!");
+                    break;
+
             }
         }
     }

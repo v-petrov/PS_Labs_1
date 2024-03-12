@@ -14,24 +14,21 @@ namespace WelcomeExtended.Helpers
         {
             return $"User Details:\nName: {user.Names}\nPassword: {user.Password}\nRole: {user.Role}\nId: {user.Id}";
         }
-        public static bool validateCredentials(UserData userData, string name, string password)
+        public static int validateCredentials(UserData userData, string name, string password)
         {
             if (name.Equals("")) 
             {
-                Console.WriteLine("The name cannot be empty!");
-                return false;
+                return 0;
             }
             if (password.Equals(""))
             {
-                Console.WriteLine("The password cannot be empty!");
-                return false;
+                return 2;
             }
             if (!userData.validateUser(name, password)) 
             {
-                Console.WriteLine("No such user found!");
-                return false;
+                return 3;
             }
-            return true;
+            return 1;
         }
         public static User getUser(UserData userData, string name, string password)
         { 
