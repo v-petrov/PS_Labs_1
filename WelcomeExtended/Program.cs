@@ -14,8 +14,8 @@ namespace WelcomeExtended
         private static int eventId = 0;
         static void Main(string[] args)
         {
-            ILogger successfulLogger = new FileLogger("successfullyLogInUsers.txt");
-            ILogger notSuccessfulLogger = new FileLogger("notSuccessfullyLogInUsers.txt");
+            ILogger successfulLogger = new FileLogger(@"E:\VS\PS_43_Vasil\WelcomeExtended\successfullyLogInUsers.txt");
+            ILogger notSuccessfulLogger = new FileLogger(@"E:\VS\PS_43_Vasil\WelcomeExtended\notSuccessfullyLogInUsers.txt");
             UserData userData = new UserData();
             User studentUser = new User()
             {

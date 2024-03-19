@@ -27,7 +27,7 @@ namespace WelcomeExtended.Loggers
             string logMessage = formatter(state, exception);
             using (StreamWriter writer = File.AppendText(_fileName))
             {
-                writer.WriteLine($"{DateTime.Now} [{logLevel}] {logMessage}\n");
+                writer.WriteLine($"{DateTime.Now} [{logLevel}] {logMessage}");               
             }
         }
     }
