@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
+using System.Security.Cryptography;
 using Welcome.Others;
 
 namespace Welcome.Model
@@ -10,8 +7,29 @@ namespace Welcome.Model
     public class User
     {
         public string Names { get; set; }
-        public string Password { get; set; }
+        private string _password;
+        public string Password
+        {
+            get { return _password; }
+            set { _password = HashPassword(value); }
+        }
+        public int FacultyNumber { get; set; }
+        public string Email { get; set; }
         public UserRolesEnum Role { get; set; }
         public int Id { get; set; }
+        private string HashPassword(string password)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
     }
 }

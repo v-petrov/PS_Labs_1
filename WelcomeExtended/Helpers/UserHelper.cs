@@ -12,7 +12,8 @@ namespace WelcomeExtended.Helpers
     {
         public static string ToString(this User user)
         {
-            return $"User Details:\nName: {user.Names}\nPassword: {user.Password}\nRole: {user.Role}\nId: {user.Id}";
+            return $"User Details:\nId: {user.Id}\nName: {user.Names}\nPassword: {user.Password}\nRole: {user.Role}" +
+                $"\nFaculty Number: {user.FacultyNumber}\nEmail: {user.Email}";
         }
         public static int validateCredentials(UserData userData, string name, string password)
         {

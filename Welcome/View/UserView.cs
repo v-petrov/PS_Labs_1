@@ -17,9 +17,11 @@ namespace Welcome.View
         }
         public void display()
         {
-            Console.WriteLine("Welcome:\n" + 
-                "User: " + _viewModel.user.Names + 
-                "\n" + "Role: " + _viewModel.user.Role);
+            Console.WriteLine("Welcome:\n" +
+                "User: " + _viewModel.user.Names +
+                "\n" + "Role: " + _viewModel.user.Role +
+                "\n" + "Faculty Number: " + _viewModel.user.FacultyNumber +
+                "\n" + "Email: " + _viewModel.user.Email);
         }
         public void displayError()
         {
