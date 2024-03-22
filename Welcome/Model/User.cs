@@ -1,23 +1,24 @@
 ﻿using System.Text;
 using System.Security.Cryptography;
 using Welcome.Others;
+using System.Runtime.CompilerServices;
 
 namespace Welcome.Model
 {
     public class User
     {
-        public string Names { get; set; }
-        private string _password;
+        public string? Names { get; set; }
+        private string? _password;
         public string Password
         {
             get { return _password; }
             set { _password = HashPassword(value); }
         }
         public int FacultyNumber { get; set; }
-        public string Email { get; set; }
+        public string? Email { get; set; }
         public UserRolesEnum Role { get; set; }
         public int Id { get; set; }
-        private string HashPassword(string password)
+        public static string HashPassword(string password)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {

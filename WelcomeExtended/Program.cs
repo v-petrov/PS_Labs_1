@@ -16,29 +16,29 @@ namespace WelcomeExtended
         {
             ILogger successfulLogger = new FileLogger(@"E:\VS\PS_43_Vasil\WelcomeExtended\Resources\successfullyLogInUsers.txt");
             ILogger notSuccessfulLogger = new FileLogger(@"E:\VS\PS_43_Vasil\WelcomeExtended\Resources\notSuccessfullyLogInUsers.txt");
-            UserData userData = new UserData();
-            User studentUser = new User()
+            UserData userData = new();
+            User studentUser = new()
             {
                 Names = "student",
                 Password = "123",
                 Role = UserRolesEnum.STUDENT
             };  
             userData.addUser(studentUser);
-            User studentUser1 = new User()
+            User studentUser1 = new()
             {
                 Names = "student1",
                 Password = "123",
                 Role = UserRolesEnum.STUDENT
             };
             userData.addUser(studentUser1);
-            User teacherUser = new User()
+            User teacherUser = new()
             {
                 Names = "teacher",
                 Password = "1234",
                 Role = UserRolesEnum.PROFESSOR
             };
             userData.addUser(teacherUser);
-            User adminUser = new User()
+            User adminUser = new()
             {
                 Names = "admin",
                 Password = "12345",
@@ -51,6 +51,7 @@ namespace WelcomeExtended
             name = Console.ReadLine();
             Console.WriteLine("Please enter your password: ");
             password = Console.ReadLine();
+            password = User.HashPassword(password);
             int res = UserHelper.validateCredentials(userData, name, password);
             switch (res)
             {
