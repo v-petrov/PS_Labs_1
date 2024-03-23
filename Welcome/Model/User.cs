@@ -17,7 +17,7 @@ namespace Welcome.Model
         public int FacultyNumber { get; set; }
         public string? Email { get; set; }
         public UserRolesEnum Role { get; set; }
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
         public static string HashPassword(string password)
         {
             using (SHA256 sha256Hash = SHA256.Create())
