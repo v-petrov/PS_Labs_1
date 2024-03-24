@@ -8,7 +8,7 @@ namespace DataLayer
         {
             using (var context = new DatabaseContext())
             {
-                context.Database.EnsureDeleted();
+                /*context.Database.EnsureDeleted();*/
                 context.Database.EnsureCreated();
 
                 DatabaseMenu.Menu();
