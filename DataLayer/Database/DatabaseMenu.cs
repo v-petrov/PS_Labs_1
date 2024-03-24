@@ -50,7 +50,7 @@ namespace DataLayer.Database
                 var users = context.Users.ToList();
                 foreach (var user in users)
                 {
-                    Console.WriteLine($"Name: {user.Names}, Role: {user.Role}");
+                    Console.WriteLine($"Id: {user.Id}, Name: {user.Names}, Role: {user.Role}");
                 }
                 logger.LogMessage("All users gotten!");
             }
@@ -72,21 +72,21 @@ namespace DataLayer.Database
 
             static void DeleteUser(DatabaseContext context, LoggerToDatabase logger)
             {
-                Console.WriteLine("Enter the name of the user to delete:");
-                string name = Console.ReadLine();
+                Console.WriteLine("Enter ID of the user to delete:");
+                int id = int.Parse(Console.ReadLine());
 
-                var user = context.Users.FirstOrDefault(u => u.Names == name);
+                var user = context.Users.FirstOrDefault(u => u.Id == id);
                 if (user != null)
                 {
                     context.Users.Remove(user);
                     context.SaveChanges();
-                    Console.WriteLine("The user has been deleted successfully.");
-                    logger.LogMessage($"The user has been deleted successfully: {name}");
+                    Console.WriteLine($"The user: {user.Names} with id: {id} has been deleted successfully.");
+                    logger.LogMessage($"The user: {user.Names} with id: {id} has been deleted successfully.");
                 }
                 else
                 {
-                    Console.WriteLine("No user found with that name.");
-                    logger.LogMessage($"The user: {name} couldn't be found!");
+                    Console.WriteLine($"No user found with that ID: {id}");
+                    logger.LogMessage($"The user with that ID: {id} couldn't be found!");
                 }
             }
         }

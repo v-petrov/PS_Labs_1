@@ -21,19 +21,6 @@ namespace DataLayer.Database
             string databasePath = Path.Combine(solutionFolder, databaseFile);
             optionsBuilder.UseSqlite($"Data Source={databaseFile}");
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            var user = new DatabaseUser()
-            {
-                Id = 1,
-                Names = "John Doe",
-                Password = "1234",
-                Role = UserRolesEnum.ADMIN,
-                Expires = DateTime.Now.AddYears(10)
-            };
-
-            modelBuilder.Entity<DatabaseUser>()
-                .HasData(user);
-        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder){}
     }
 }
