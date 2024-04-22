@@ -6,9 +6,37 @@
         xmlns:local="clr-namespace:UI"
         xmlns:local2="clr-namespace:UI.Components"
         mc:Ignorable="d"
+        WindowStyle="None"
+        Background="#D3D3D3"
         Title="List of all students" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
     <Grid>
-        <local2:StudentsList x:Name="studentsList" Padding="2" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border x:Name="LeftBorder" Background="#808080" Grid.Column="0" Grid.Row="0" Grid.RowSpan="7"/>
+        <Border x:Name="RightBorder" Background="#808080" Grid.Column="2" Grid.Row="0" Grid.RowSpan="7"/>
+        <Border x:Name="TopBorder" Background="#808080" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"/>
+        <Border x:Name="BottomBorder" Background="#808080" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6"/>
+
+        <Button x:Name="Close" Grid.Column="1" Grid.Row="5" Click="Close_Click" HorizontalAlignment="Left" Width="189" Margin="189,0,0,0">Close</Button>
+        <Button x:Name="HideListVisibility" Grid.Column="1" Grid.Row="5" Click="HideListVisibility_Click" Content="Hide List" HorizontalAlignment="Left" Width="189" Margin="378,0,0,0"/>
+        <Button x:Name="ChangeColor" Grid.Column="1" Grid.Row="5" Click="ChangeColor_Click" Content="Background Color Change" HorizontalAlignment="Left" Width="189"/>
+        <Button x:Name="ChangeBorderColor" Grid.Column="1" Grid.Row="5" Click="ChangeBorderColor_Click" Content="Change Border Color" HorizontalAlignment="Left" Width="192" Margin="567,0,0,0"/>
+
+        <Label Grid.Row="1" Grid.Column="1" FontSize="30" HorizontalAlignment="Center">Welcome, Vasko</Label>
+        <Label Grid.Row="2" Grid.Column="1" FontSize="15" HorizontalAlignment="Center">Student list</Label>
+        <local2:StudentsList Grid.Row="3" Grid.Column="1" x:Name="studentsList" Padding="2" />
     </Grid>
 </Window>
